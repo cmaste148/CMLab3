@@ -110,17 +110,102 @@ void displayDungeon(const char dungeon[][MAX_SIZE])
 
 void getMove(const int player[], int move[])
 {
+    std::cout << "*WASD*" << std::endl;
+    char input;
+    bool moved;
+    do
+    {
+        std::cin >> input;
+        input = std::toupper(input);
+        switch(input)
+        {
+            case 'W':
+            {
+                if (player[0] > 0)
+                {
+                    move[0] = player[0] - 1;
+                    move[1] = player[1];
+                    moved = true;
+                }
+                else
+                {
+                    std::cout << "Path is blocked" << std::endl;
+                    moved = false;
+                }
+                break;
+            }
+            case 'A':
+            {
+                if (player[1] > 0)
+                {
+                    move[1] = player[1] - 1;
+                    move[0] = player[0];
+                    moved = true;
+                }
+                else
+                {
+                    std::cout << "Path is blocked" << std::endl;
+                    moved = false;
+                }
+                break;
+            }
+            case 'S':
+            {
+                if (player[0] < MAX_SIZE - 1)
+                {
+                    move[0] = player[0] + 1;
+                    move[1] = player[1];
+                    moved = true;
+                }
+                else
+                {
+                    std::cout << "Path is blocked" << std::endl;
+                    moved = false;
+                }
+                break;
+            }
+            case 'D':
+            {
+                if (player[1] < MAX_SIZE - 1)
+                {
+                    move[1] = player[1] + 1;
+                    move[0] = player[0];
+                    moved = true;
+                }
+                else
+                {
+                    std::cout << "Path is blocked" << std::endl;
+                    moved = false;
+                }
+                break;
+            }
+            default:
+            {
+                std::cout << "Invalid Input" << std::endl;
+                moved = false;
+            }
 
+        }
+
+    } while (!moved);
 }
 
-bool checkMove(const char dungeon[][MAX_SIZE], int move[], char item)
+bool checkMove(const char dungeon[][MAX_SIZE], const int move[], char item)
 {
-    return true;
+    if (dungeon[move[0]][move[1]] == item)
+    {
+        return true;
+    }
+
+    return false;
 }
 
-void updateDungeon(char dungeon[][MAX_SIZE], const int oldPlayer[], const int newPLayer[])
+void updateDungeon(char dungeon[][MAX_SIZE], int oldPlayer[], const int newPLayer[])
 {
-
+    dungeon[oldPlayer[0]][oldPlayer[1]] = '.';
+    dungeon[newPLayer[0]][newPLayer[1]] = 'P';
+    oldPlayer[0] = newPLayer[0];
+    oldPlayer[1] = newPLayer[1];
 }
 
 bool playAgain()

@@ -16,8 +16,8 @@ const int GOLD = 2;
 void createDungeon(char[][MAX_SIZE], int, int, int[]);
 void displayDungeon(const char[][MAX_SIZE]);
 void getMove(const int[], int[]);
-bool checkMove(const char[][MAX_SIZE], int[], char);
-void updateDungeon(char[][MAX_SIZE], const int[], const int[]);
+bool checkMove(const char[][MAX_SIZE], const int[], char);
+void updateDungeon(char[][MAX_SIZE], int[], const int[]);
 bool playAgain();
 
 // General Functions
